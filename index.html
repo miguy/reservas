@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>CLUB</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="components/lungo/lungo.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.css">
+    <link rel="stylesheet" href="components/lungo/theme.lungo.css">
+	<link rel="stylesheet" href="components/lungo/club.css">
+</head>
+
+<body class="app">
+
+	<!-- MAIN ######################################################################### -->
+    <section id="main" data-transition="">
+        <header data-title="Clubs" class="degradado"></header>
+			<!-- LISTAS DE CLUBS ######################################################### -->
+		<article id="main-article" class="active list indented scroll">
+			<ul>
+				<li data-icon="picture" class="selectable arrow">
+					<a href="#login"  data-router="section"><strong>Club 1</strong>
+					<small>Avenida Andalucia Nº1 - Estepona (Málaga) - 987654321</small></a>
+				</li>
+				<li data-icon="picture" class="selectable arrow">
+					<a href="#login"  data-router="section"><strong>Club 2</strong>
+					<small>Club 2</small></a>
+				</li>
+				<li data-icon="picture" class="selectable arrow">
+					<a href="#login"  data-router="section"><strong>Club 3</strong>
+					<small>Club 3</small></a>
+				</li>
+				<li data-icon="picture" class="selectable arrow">
+					<a href="#login"  data-router="section"><strong>Club 4</strong>
+					<small>Club 4</small></a>
+				</li>
+			</ul>
+		</article>
+	</section>
+	<!-- FIN MAIN ################################################################### -->
+		
+	<!-- LOGIN USUARIO ############################################################## -->
+	<section id="login" data-transition="slide">
+		<header data-back="menu" class="login" data-title="Login Club"></header>
+		<article id="login-article" class="active splash">
+				<h1> LOGIN </h1>
+				<form>
+					<p id="error">Usuario o Contraseña Incorrecto/a</p>
+					<br />
+					<input id="nomuser" type="text" value="" placeholder="Nombre de Usuario"/>
+					<input id="passuser" type="password" value="" placeholder="Contraseña"/>
+					<a href="#" class="button blue anchor" data-icon="user" id="ingresar" >Ingresar</a>
+				</form>
+		</article>
+		<!--<footer id="footclub">
+			C/ Avenida Andalucia Nº1  Estepona (Málaga) 29680<br/>
+			Tlf. Contacto: 987654321
+		</footer>-->
+	</section>
+		
+	<!-- DATOS DE USUARIO Y RESERVAS ################################################# -->
+	<section id="user" data-transition="slide">
+		<header data-back="home" data-title="Home" class="extended degradado">
+			<nav class="right">
+				<a href="#editar-user" data-router="section" data-icon="settings"></a> 
+			</nav>
+		</header>
+		<nav class="groupbar">
+			<a href="#user-data" data-router="article" class="active" data-icon="user">Datos</a>
+			<a href="#reserva" data-router="article" data-icon="ticket">Reservas</a>
+		</nav>
+		<article id="user-data" class="active user indented">
+			<h1><span class="style_title">Datos Usuario</span></h1>
+			<ul class="list indented">
+				<li data-icon="user" >
+					<strong>Nombre</strong>
+					<small id="nuser"></small>
+				</li>
+				<li data-icon="phone">
+					<strong>Telefono Contacto</strong>
+					<small id="tuser"></small>
+				</li>
+				<li data-icon="mail">
+					<strong>Email</strong>
+					<small id="muser"></small>
+				</li>
+		</article>
+		<article id="reserva"  class="indented">
+			<form>
+				<div class="reservar">
+					<strong><span class="style_title">Seleccione la Fecha:</span> </strong>
+					<input id="fecha_res" type="date" />
+				</div>
+				<div class="reservar">
+					<strong><span class="style_title">Seleccione la Hora:</span> </strong>
+					<label class="select">
+						<select id="hora_res" class="custom" />
+						</select>
+					</label>
+				</div>
+			</form>
+			<div id="error_fecha">
+				<p class="style_title alerta" data-icon="cancel">  Seleccione una Fecha correcta</p>
+			</div>
+			<div id="error_hora">
+				<p class="style_title alerta" data-icon="cancel">  Seleccione una Hora correcta</p>
+			</div>	
+			<ul id="pistas" class="list indented">
+			</ul>
+		</article>
+	</section>
+	<!-- FIN DATOS DE USUARIOS Y RESERVAS ########################################### -->
+	<!-- RESERVAR PISTA -->
+	<section id="reservar-pistas" data-transition="slide">
+		<header data-back="ticket" data-title="Reserva de Pistas" class="degradado"></header>
+		<article id="res-pistas-article" class="active indented">
+			<form>
+				<ul class="list indented">
+					<li class="title_res">
+						<strong>
+							<span class="style_title">Nombre de la Reserva</span>
+						</strong>
+						<small class="nreserva"></small>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Pista:</span> 
+							<small class="npista"></small>
+						</strong>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Hora:</span> 
+							<small class="horapista"></small>
+						</strong>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Comentarios del Jugador:</span>
+							<textarea name="comentarios" id="comentarios">
+							</textarea>
+						</strong>
+					</li>
+					<li class="lateral_res">
+						<div id="columns">
+							<div id="t-res">
+								<div class="tres">
+									<strong>
+										<span class="style_title">Tipo de Reserva:</span>
+									</strong>
+								</div>
+								<input class="treserva" type="radio"  value="0"  name="tipores" > Individual (2) <br/>
+								<input class="treserva" type="radio"  value="1"  name="tipores" checked> Doble (4)<br/>
+							</div>
+							<div id="i-res">
+								<div class="ires">
+									<strong>
+										<span class="style_title">Invitados:</span>
+									</strong>
+								</div>
+								<input class="ireserva" type="radio"  value="0"  name="invres" checked> Ningún Invitado<br/>
+								<input class="ireserva" type="radio"  value="1"  name="invres" > 1 Invitado<br/>
+								<input class="ireserva" type="radio"  value="2"  name="invres" > 2 Invitados<br/>
+								<div id="invi3">
+									<input class="ireserva" type="radio"  value="3"  name="invres" > 3 Invitados<br/>	
+								</div>				
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div id="btn-reservar">
+					<a href="#" id="reservar" class="button blue anchor">Reservar</a>
+				</div>
+			</form>
+		</article>
+	</section>
+	<!-- FIN RESERVAS PISTAS -->
+	<!-- PISTAS RESERVADAS -->
+	<section id="pista-reservada" data-transition="cover">
+		<header data-back="left" id="back-user" class="degradado" data-title="Información Pista Reservada"></header>
+		<article id="pista-res-article" class="active indented">
+			<form>
+				<ul class="list indented">
+					<li class="title_res">
+						<strong>
+							<span class="style_title">Nombre de la Reserva</span>
+						</strong>
+						<small class="nreserva"></small>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Pista:</span> 
+							<small class="npista"></small>
+						</strong>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Hora:</span> 
+							<small class="horapista"></small>
+						</strong>
+					</li>
+					<li class="lateral_res">
+						<strong>
+							<span class="style_title">Comentarios del Jugador:</span>
+							<small class="ncomentarios"></small>
+						</strong>
+					</li>
+				</ul>
+				<div id="cancel-res">
+					<a href="#" id="cancel" class="button blue anchor">Cancelar Reserva</a>
+				</div>
+				<div id="err-cancel">
+					<p data-icon="cancel"> El plazo para cancelar la reserva ha finalizado.</p>
+					
+				</div>
+				
+			</form>
+		</article>
+	</section>
+	<!-- FIN DE PISTAS RESERVADAS -->
+
+	<!-- EDITAR OPCIONES DEL USUARIO ################################################ -->
+	<section id="editar-user" data-transition="cover">
+		<header data-back="user" id="back-dat-user" class="degradado" data-title="Editar Usuario"></header>
+		<article id="edit-user-article" class="active user indented">
+			<form>
+				<ul class="list indented">
+					<li class="title_user">
+						<strong>
+							<span class="style_title">Nombre Usuario/a: </span>
+							<small id="nombre"></small>
+						</strong>
+						
+					</li>
+					<li class="lateral_user">
+						<strong>
+							<span class="style_title">Teléfono Contacto:</span> 
+							<input id="tlf" type="tel" placeholder="Telefono" value="" required />
+						</strong>
+					</li>
+					<li class="lateral_user">
+						<strong>
+							<span class="style_title">Email:</span> 
+							<input id="email" type="text" placeholder="Email" value="" required />
+						</strong>
+					</li>
+				</ul>
+				<a href="#" id="guardar" class="button blue anchor">Guardar Cambios</a>
+				
+			</form>
+		</article>
+	</section>
+	<!-- FIN EDITAR OPCIONES DEL USUARIO ############################################# -->
+		
+    <!-- Lungo - Dependencies -->
+    <script src="components/quojs/quo.js"></script>
+    <script src="components/lungo/lungo.js"></script>
+	<script src="components/quojs/js.js"></script>
+
+
+</body>
+</html>
