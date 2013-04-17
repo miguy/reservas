@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="components/lungo/lungo.icon.css">
     <link rel="stylesheet" href="components/lungo/theme.lungo.css">
 	<link rel="stylesheet" href="components/lungo/club.css">
+	<link href="components/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="components/js/jquery-ui-1.10.2.custom.min.js"></script>
 </head>
 
 <body class="app">
@@ -98,7 +101,7 @@
 			<form>
 				<div class="reservar">
 					<strong><span class="style_title">Seleccione la Fecha:</span> </strong>
-					<input id="fecha_res" type="date" />
+					<input id="fecha_res" type="text" />
 				</div>
 				<div class="reservar">
 					<strong><span class="style_title">Seleccione la Hora:</span> </strong>
@@ -108,9 +111,6 @@
 					</label>
 				</div>
 			</form>
-			<div id="error_fecha">
-				<p class="style_title alerta" data-icon="cancel">  Seleccione una Fecha correcta</p>
-			</div>
 			<div id="error_hora">
 				<p class="style_title alerta" data-icon="cancel">  Seleccione una Hora correcta</p>
 			</div>	
@@ -122,7 +122,7 @@
 	<!-- RESERVAR PISTA -->
 	<section id="reservar-pistas" data-transition="slide">
 		<header data-back="ticket" data-title="Reserva de Pistas" class="degradado"></header>
-		<article id="res-pistas-article" class="active indented">
+		<article id="res-pistas-article" class="active indented scroll">
 			<form>
 				<ul class="list indented">
 					<li class="title_res">
@@ -134,13 +134,13 @@
 					<li class="lateral_res">
 						<strong>
 							<span class="style_title">Pista:</span> 
-							<small class="npista"></small>
+							<span class="npista slight"></span>
 						</strong>
 					</li>
 					<li class="lateral_res">
 						<strong>
 							<span class="style_title">Hora:</span> 
-							<small class="horapista"></small>
+							<span class="horapista slight"></span>
 						</strong>
 					</li>
 					<li class="lateral_res">
@@ -167,11 +167,11 @@
 										<span class="style_title">Invitados:</span>
 									</strong>
 								</div>
-								<input class="ireserva" type="radio"  value="0"  name="invres" checked> Ningún Invitado<br/>
-								<input class="ireserva" type="radio"  value="1"  name="invres" > 1 Invitado<br/>
-								<input class="ireserva" type="radio"  value="2"  name="invres" > 2 Invitados<br/>
+								<input class="ireserva" type="radio"  value="0"  name="invres" checked> 0<br/>
+								<input class="ireserva" type="radio"  value="1"  name="invres" > 1 <br/>
+								<input class="ireserva" type="radio"  value="2"  name="invres" > 2 <br/>
 								<div id="invi3">
-									<input class="ireserva" type="radio"  value="3"  name="invres" > 3 Invitados<br/>	
+									<input class="ireserva" type="radio"  value="3"  name="invres" > 3 <br/>	
 								</div>				
 							</div>
 						</div>
@@ -187,7 +187,7 @@
 	<!-- PISTAS RESERVADAS -->
 	<section id="pista-reservada" data-transition="cover">
 		<header data-back="left" id="back-user" class="degradado" data-title="Información Pista Reservada"></header>
-		<article id="pista-res-article" class="active indented">
+		<article id="pista-res-article" class="active indented scroll">
 			<form>
 				<ul class="list indented">
 					<li class="title_res">
@@ -199,19 +199,19 @@
 					<li class="lateral_res">
 						<strong>
 							<span class="style_title">Pista:</span> 
-							<small class="npista"></small>
+							<span class="npista slight"></span>
 						</strong>
 					</li>
 					<li class="lateral_res">
 						<strong>
 							<span class="style_title">Hora:</span> 
-							<small class="horapista"></small>
+							<span class="horapista slight"></span>
 						</strong>
 					</li>
 					<li class="lateral_res">
 						<strong>
 							<span class="style_title">Comentarios del Jugador:</span>
-							<small class="ncomentarios"></small>
+							<small class="ncomentarios slight"></small>
 						</strong>
 					</li>
 				</ul>
@@ -265,6 +265,7 @@
     <script src="components/quojs/quo.js"></script>
     <script src="components/lungo/lungo.js"></script>
 	<script src="components/quojs/js.js"></script>
+
 
 
 </body>

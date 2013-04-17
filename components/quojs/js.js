@@ -1,7 +1,6 @@
 Lungo.init({	name: 'example'	});
 $$('#error').hide();
 $$('#error_hora').hide();
-$$('#error_fecha').hide();
 $$('#pistas').hide();
 $$('.columns-res').hide();
 
@@ -16,8 +15,14 @@ var now = new Date();
 var dia = ("0" + now.getDate()).slice(-2);
 var mes = ("0" + (now.getMonth() + 1)).slice(-2);
 var anyo = now.getFullYear();
-var hoy = (anyo)+"-"+(mes)+"-"+(dia) ;
+var hoy = anyo+"/"+mes+"/"+dia ;
 var horaA = now.getHours();
+
+$("#fecha_res").datepicker({	
+	inline: true,
+	minDate: 0,
+    dateFormat: 'yy/mm/dd'
+});
 
 
 function listado_horas(){
@@ -159,8 +164,7 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 					$$('.nreserva').html('Reserva del ' + fecha);
 							
 					if(anyo==elemF[0] && mes==elemF[1] && dia==elemF[2]){
-						if ( (diferencia) >= 4) { $$('#btn-reservar').show(); } 
-					
+						if ( (diferencia) >= 0) { $$('#btn-reservar').show(); }
 					}else {
 						if(anyo<elemF[0]){ $$('#btn-reservar').show(); }
 						else {
@@ -227,7 +231,6 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 
 function acciones(){
 	$$('#error_hora').hide();
-	$$('#error_fecha').hide();
 	$$('#pistas').show();			// para que no se multipliquen las listas de pistas
 	$$('#pistas').empty();
 	$$('#btn-reservar').hide();
@@ -235,7 +238,7 @@ function acciones(){
 }
 
 
-$$('#fecha_res').on('change', function(){
+$('#fecha_res').on('change', function(){
 	fecha=$$('#fecha_res').val();
 	hora=$$('#hora_res').val();	
 
@@ -244,7 +247,7 @@ $$('#fecha_res').on('change', function(){
 		if(hora!=0){
 			acciones();
 			var elemH = horasR[hora].split(':');
-			var elemF = fecha.split('-');
+			var elemF = fecha.split('/');
 			var diferencia=elemH[0]-horaA;
 			horaSR=hora;
 			fechaSR=fecha;
@@ -254,9 +257,6 @@ $$('#fecha_res').on('change', function(){
 			$$('#pistas').hide();
 			$$('#error_hora').show();
 		}
-	} else {
-		$$('#pistas').hide();
-		$$('#error_fecha').show();
 	}
 });
 
@@ -272,17 +272,13 @@ $$('#hora_res').on('change', function(){
 		if(fecha){
 			acciones();
 			var elemH = horasR[hora].split(':');
-			var elemF = fecha.split('-');
+			var elemF = fecha.split('/');
 			var diferencia=elemH[0]-horaA;
 			horaSR=hora;
 			fechaSR=fecha;
 			// listará las pistas disponibles ocupadas o no
-			listado_pistas(elemH,elemF,diferencia,hora,fecha);
-					
-		} else {
-			$$('#pistas').hide();
-			$$('#error_fecha').show();
-		}
+			listado_pistas(elemH,elemF,diferencia,hora,fecha);		
+		} 
 	} else {
 		$$('#pistas').hide();
 		$$('#error_hora').show();
@@ -321,7 +317,7 @@ $$('#cancel').on('click', function(){
 	        callback: function(){ 
 		        var cancelar = function(ok){			
 					if(ok==1){
-						resetear_hora();			
+						refrescar_pistas();			
 					}
 				}
 
@@ -334,7 +330,7 @@ $$('#cancel').on('click', function(){
 	        icon: 'close',
 	        label: 'Cancelar',
 	        callback: function(){ 
-	        	resetear_hora();	
+	        	refrescar_pistas();	
 	        }
 	    }
 	});
@@ -344,11 +340,8 @@ $$('#cancel').on('click', function(){
 
 
 $$('#reservar').on('click', function() {
-
 	coment=$$('#comentarios').val();
-	if ( !($$('#comentarios').val()) ) {coment='Sin Comentarios';}
-	console.log("comentarios " + coment)
-
+	if ( !$.trim(coment) ) {coment="Sin comentarios";} // si esta vacio o en blanco
 	var realizarReserva = function(reservar){	
 				if(reservar!=0){
 					Lungo.Notification.success(
@@ -358,6 +351,7 @@ $$('#reservar').on('click', function() {
 					    2                         
 					);
 					Lungo.Router.section("pista-reservada");
+					$$('.ncomentarios').val(coment);
 				} else {
 					Lungo.Notification.error(
 						"Error",                      
@@ -376,7 +370,22 @@ $$('#reservar').on('click', function() {
 
 // acciones de las cabeceras para volver a la anterior seccion 
 // y resetear el valor de la hora
-$$('#back-user').on('click', function(){	resetear_hora();	});
+function refrescar_pistas(){
+		Lungo.Router.section("user");
+		fecha=$$('#fecha_res').val();
+		hora=$$('#hora_res').val(); 
+		acciones();
+		var elemH = horasR[hora].split(':');
+		var elemF = fecha.split('/');
+		var diferencia=elemH[0]-horaA;
+		horaSR=hora;
+		fechaSR=fecha;
+		listado_pistas(elemH,elemF,diferencia,hora,fecha);	
+
+}
+//$$('#back-user').on('click', function(){	resetear_hora();	});
+
+$$('#back-user').on('click', function(){	refrescar_pistas();	});
 $$('#back-dat-user').on('click', function(){	resetear_hora();	});
 
 
@@ -390,8 +399,8 @@ $$('#guardar').on('click', function() {
 		var editar = function(edicion){	
 				if(edicion){
 					Lungo.Notification.success(
-						"Confirmacion",                  
-						"Cambios realizados correctamente",    
+						"Ok",                  
+						"Los cambios han sido efectuados.",    
 						"check",                    
 						2                         
 					);
