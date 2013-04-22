@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="components/lungo/theme.lungo.css">
 	<link rel="stylesheet" href="components/lungo/club.css">
 	<link href="components/css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="components/js/jquery-ui-1.10.2.custom.min.js"></script>
 </head>
 
@@ -64,10 +64,6 @@
 					<a href="#" class="button blue anchor" data-icon="user" id="ingresar" >Ingresar</a>
 				</form>
 		</article>
-		<!--<footer id="footclub">
-			C/ Avenida Andalucia Nº1  Estepona (Málaga) 29680<br/>
-			Tlf. Contacto: 987654321
-		</footer>-->
 	</section>
 		
 	<!-- DATOS DE USUARIO Y RESERVAS ################################################# -->
@@ -129,7 +125,7 @@
 	<!-- FIN DATOS DE USUARIOS Y RESERVAS ########################################### -->
 	<!-- RESERVAR PISTA -->
 	<section id="reservar-pistas" data-transition="slide">
-		<header data-back="ticket" data-title="Reserva de Pistas" class="degradado"></header>
+		<header id="back-list-pistas" data-back="ticket" data-title="Reserva de Pistas" class="degradado"></header>
 		<article id="res-pistas-article" class="active indented scroll">
 			<form>
 				<ul class="list indented">
@@ -164,8 +160,8 @@
 								<span class="style_title">Tipo de Reserva:</span>
 							</strong>
 							<div class="radio-reserva">
-								<input class="treserva" id="radio1" type="radio"  value="0"  name="tipores" checked><label for="radio1" class="efecto-radio">Individual (2)</label>
-								<input class="treserva" id="radio2" type="radio"  value="1"  name="tipores" ><label for="radio2" class="efecto-radio" >Doble (4)</label>
+								<input class="treserva" id="radio1" type="radio"  value="0"  name="tipores"><label for="radio1" class="efecto-radio">Individual (2)</label>
+								<input class="treserva" id="radio2" type="radio"  value="1"  name="tipores" checked><label for="radio2" class="efecto-radio" >Doble (4)</label>
 							</div>
 						</div>
 						<div class="ires">
@@ -182,8 +178,8 @@
 							</div>
 							<div id="individual">
 								<div class="radio-reserva" >
-									<input id="i0" class="ireserva" type="radio"  value="0"  name="invres"> <label for="i0" class="efecto-radio invi">0</label>
-									<input id="i1" class="ireserva" type="radio"  value="1"  name="invres" > <label for="i1" class="efecto-radio invi">1</label>
+									<input id="i0" class="ireserva" type="radio"  value="0"  name="invresind" checked> <label for="i0" class="efecto-radio invi">0</label>
+									<input id="i1" class="ireserva" type="radio"  value="1"  name="invresind" > <label for="i1" class="efecto-radio invi">1</label>
 								</div>
 							</div>
 

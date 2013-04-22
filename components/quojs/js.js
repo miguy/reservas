@@ -170,7 +170,6 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 					pistaSR=$$(this).attr('data-name');
 					$$('.npista').html(pistaSR);
 					$$('.horapista').html(horasR[hora]);
-					//$$('.nreserva').html('Reserva del ' + fecha);
 					$$('.nreserva').html('Reserva del ' + fecha);	
 
 					if(anyo==elemF[0] && mes==elemF[1] && dia==elemF[2]){
@@ -244,6 +243,7 @@ function acciones(){
 	$$('#pistas').show();			// para que no se multipliquen las listas de pistas
 	$$('#pistas').empty();
 	$$('#btn-reservar').hide();
+	$$('#cancel-res').hide();
 	$$('#err-cancel').hide();
 }
 
@@ -393,8 +393,9 @@ $$('#reservar').on('click', function() {
 					    "check",                    
 					    2                         
 					);
-					Lungo.Router.section("pista-reservada");
-					$$('.ncomentarios').val(coment);
+					refrescar_pistas();
+					//Lungo.Router.section("pista-reservada");
+					//$$('.ncomentarios').val(coment);
 				} else {
 					Lungo.Notification.error(
 						"Error",                      
@@ -434,7 +435,7 @@ function refrescar_pistas(){
 //$$('#back-user').on('click', function(){	resetear_hora();	});
 $$('#back-user').on('click', function(){ refrescar_pistas()});
 $$('#back-dat-user').on('click', function(){	Lungo.Router.section("user");	});
-
+$$('#back-list-pistas').on('click', function(){refrescar_pistas()});
 
 // edicion del usuario, permitirá cambiar tanto email como telefono
 $$('#guardar').on('click', function() {
