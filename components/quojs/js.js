@@ -10,6 +10,7 @@ var horasR=[];
 var pistaSR;
 var horaSR;
 var fechaSR;
+var fechaD;
 var tipores=0;
 var invitados=0;
 var now = new Date();
@@ -46,6 +47,7 @@ function listado_horas(){
 			
 	var ok = {ok: "1"};
 	var url = "http://www.grupogenter.es/app_reservas/horas.php";
+	//var url = "http://localhost/app_reservas_22_04_2013/components/horas.php";
 	$$.post(url, ok, cargarHoras, "json");  
 }
 
@@ -77,6 +79,7 @@ $$('#ingresar').tap(function() {
 		}				
 		var datos = {user: userlog, pass: passlog};
 		var url = "http://www.grupogenter.es/app_reservas/login.php";
+		//var url = "http://localhost/app_reservas_22_04_2013/components/login.php";
 		$$.post(url, datos, loginUser, "json");
 	}else{	$$('#error').show();	}	
 });
@@ -105,6 +108,7 @@ function usuarios_reserva(anyo,mes,dia,elemF,diferencia,fecha,hora){
 
 	var info={user: userR[0], fecha: fecha, hora: hora, pista: pistaSR};
 	var url = "http://www.grupogenter.es/app_reservas/usuario_reserva.php";
+	//var url = "http://localhost/app_reservas_22_04_2013/components/usuario_reserva.php";
 	$$.post(url, info, usuariores, "json"); 
 }
 
@@ -116,8 +120,25 @@ function comentariosReserva(fecha, hora, pistaSR){
 		}
 		var comment = {fecha: fecha, hora: hora, pista: pistaSR };
 		var url = "http://www.grupogenter.es/app_reservas/comentarios.php";
+		//var url = "http://localhost/app_reservas_22_04_2013/components/comentarios.php";
 		$$.post(url, comment, cargarcomentarios, "json");
 
+}
+
+function jugadoresInscritos(fecha, hora, pistaSR){
+	$$('#list-jug-ins').empty();
+	var cargarJugadores= function(jugadores){
+		if(jugadores){
+			$$.each(jugadores, function(i) { 
+				$$('#list-jug-ins').append('<li class="jugins"><small>'+jugadores[i].jug+'</small></li>');
+			});
+		}
+	}
+
+	var info = {fecha: fecha, hora: hora, pista: pistaSR };
+	var url = "http://www.grupogenter.es/app_reservas/jugadores.php";
+	//var url = "http://localhost/app_reservas_22_04_2013/components/jugadores.php";
+	$$.post(url, info, cargarJugadores, "json");
 }
 
 // listara el total de pistas
@@ -170,8 +191,8 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 					pistaSR=$$(this).attr('data-name');
 					$$('.npista').html(pistaSR);
 					$$('.horapista').html(horasR[hora]);
-					$$('.nreserva').html('Reserva del ' + fecha);	
-
+					$$('.nreserva').html('Reserva del ' + fechaD);	
+					$$('#comentarios').val('');
 					if(anyo==elemF[0] && mes==elemF[1] && dia==elemF[2]){
 						if ( (diferencia) >= 0) { $$('#btn-reservar').show(); }
 					}else {
@@ -197,10 +218,11 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 					pistaSR=$$(this).attr('data-name');
 					$$('.npista').html(pistaSR);
 					$$('.horapista').html(horasR[hora]);
-					$$('.nreserva').html('Reserva del ' + fecha);
+					$$('.nreserva').html('Reserva del ' + fechaD);
 					$$('#cancel-res').hide();
 					$$('#err-cancel').hide();
 					comentariosReserva(fecha, hora, pistaSR);
+					jugadoresInscritos(fecha,hora,pistaSR);
 					// llamará a la función para permitirle ver al usuario 
 					// que ha reservado la pista el boton de cancelar la reserva
 					// en otro caso si no lo fuese, no vería ningún botón
@@ -214,11 +236,12 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 					pistaSR=$$(this).attr('data-name');
 					$$('.npista').html(pistaSR);
 					$$('.horapista').html(horasR[hora]);
-					$$('.nreserva').html('Reserva del ' + fecha);
+					$$('.nreserva').html('Reserva del ' + fechaD);
 					$$('#cancel-res').hide();
 					$$('#err-cancel').hide();
 					
 					comentariosReserva(fecha, hora, pistaSR);
+					jugadoresInscritos(fecha,hora,pistaSR);
 					// llamará a la función para permitirle ver al usuario 
 					// que ha reservado la pista el boton de cancelar la reserva
 					// en otro caso si no lo fuese, no vería ningún botón
@@ -229,11 +252,13 @@ function listado_pistas(elemH,elemF,diferencia,hora,fecha){
 			}	
 			var FyH = {fecha: fecha, hora: hora};
 			var url = "http://www.grupogenter.es/app_reservas/pistas.php";
+			//var url = "http://localhost/app_reservas_22_04_2013/components/pistas.php";
 			$$.post(url, FyH, cargarPistas, "json"); 
 		}				
 	}
 	var c = "1";
 	var url = "http://www.grupogenter.es/app_reservas/cantidadPistas.php";
+	//var url = "http://localhost/app_reservas_22_04_2013/components/cantidadPistas.php";
 	$$.post(url, c, cantidadPistas, "json"); 
 }
 
@@ -261,6 +286,7 @@ function formato_fecha(fecha){
 	}
 
 	cadena=nsemana+' '+dsemana+','+meses[manyo-1]+', '+nanyo;
+	fechaD=cadena;
 	return cadena
 };
 
@@ -366,6 +392,7 @@ $$('#cancel').on('click', function(){
 
 			var info={user: userR[0], fecha: fechaSR, hora: horaSR, pista: pistaSR};
 			var url = "http://www.grupogenter.es/app_reservas/cancelar_reserva.php";
+			//var url = "http://localhost/app_reservas_22_04_2013/components/cancelar_reserva.php";
 			$$.post(url, info, cancelar, "json"); 
 			}
 	    },
@@ -408,6 +435,7 @@ $$('#reservar').on('click', function() {
 			}
 		var datosReserva = {user: userR[0], fecha: fechaSR, hora: horaSR, pista: pistaSR, tipoR: tipores, ninv: invitados, comentarios: coment};
 		var url = "http://www.grupogenter.es/app_reservas/realizarReserva.php";
+		//var url = "http://localhost/app_reservas_22_04_2013/components/realizarReserva.php";
 		$$.post(url, datosReserva, realizarReserva, "json"); 
 });
 
@@ -458,6 +486,7 @@ $$('#guardar').on('click', function() {
 		}
 		var datosEdicion = {user: userR[1], tuser: tuser, euser: euser};
 		var url = "http://www.grupogenter.es/app_reservas/edicionUser.php";
+		//var url = "http://localhost/app_reservas_22_04_2013/components/edicionUser.php";
 		$$.post(url, datosEdicion, editar, "json"); 
 	} else {
 		Lungo.Notification.error(

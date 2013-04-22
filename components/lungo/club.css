@@ -70,6 +70,12 @@ section .list li a.active {
   background: #4688dd!important;
 }
 
+/*---LISTADO JUGADORES INSCRITOS ------*/
+.jugins {
+  border-bottom: 0px!important;
+}
+
+.jugins {margin-bottom:-8px!important}
 
 /* ------------------ BOTON ---------------------*/
 article button,
